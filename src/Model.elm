@@ -1,5 +1,15 @@
 module Model exposing (..)
 
+type SetInProgress
+    = UpToFive GameScores
+    | SixToFive Player
+    | TieBreak
+
+type alias GameScores =
+    { player1 : GamesUpToFive
+    , player2 : GamesUpToFive
+    }
+
 type GamesUpToFive
     = Zero
     | One
@@ -8,31 +18,18 @@ type GamesUpToFive
     | Four
     | Five
 
-
-type WinScore
-    = MaxFive GamesUpToFive
-    | Six
+type SetResult =
+    SameSet SetInProgress
+    | SetWon SetScore
 
 type alias SetScore =
     { winner : Player 
     , winScore : WinScore
     }
 
-type alias GameScores =
-    { player1 : GamesUpToFive
-    , player2 : GamesUpToFive
-    }
-
-
-type SetInProgress
-    = UpToFive GameScores
-    | SixToFive Player
-    | TieBreak
-
-type SetResult =
-    SameSet SetInProgress
-    | SetWon SetScore
-
+type WinScore
+    = MaxFive GamesUpToFive
+    | Six
 
 type Player
     = PlayerOne
