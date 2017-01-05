@@ -1,5 +1,10 @@
 module Model exposing (..)
 
+type Player
+    = PlayerOne
+    | PlayerTwo
+
+
 type SetInProgress
     = UpToFive GameScores
     | SixToFive Player
@@ -31,42 +36,39 @@ type WinScore
     = MaxFive GamesUpToFive
     | Six
 
-type Player
-    = PlayerOne
-    | PlayerTwo
-
 
 type alias FirstSet =
-    { setwinner : Player
-    , looserscore : Games
-    }
-
+    SetScore
 
 type alias SecondSet =
-    { secondsetwinner : Player
-    , alreadywonfirst : Bool
-    , secondlooserscores : ( Games, Games )
+    { setWinner : Player
+    , winScore : WinScore
+    , firstSet : SetScore
     }
 
 
 type alias ThirdSet =
-    { wonthirdandsecond : Bool
-    , thirdsetlooserscores : ( Games, Games, Games )
+    { leader : Player
+    , leaderLost : OneSet
+    , setScores : ( WinScore, WinScore, WinScore )
     }
 
+type OneSet =
+    Set1
+    | Set2
+    | Set3
 
 type alias FourthSet =
-    { foursthsetlooserscores : ( Games, Games, Games, Games )
+    { setWinner : Player
+    , wonEarlier : OneSet
+    , setScores : ( WinScore, WinScore, WinScore, WinScore )
     }
 
-
-type alias OtherSets =
-    Maybe SecondSet (Maybe ThirdSet (Maybe FourthSet))
-
-
 type Previous
-    = PlayedOne FirstSet
-    | PlayedMore OtherSets
+    = PlayedNone
+    | PlayedOne FirstSet
+    | PlayedTwo SecondSet
+    | PlayedThree ThirdSet
 
 
 type alias Model =
