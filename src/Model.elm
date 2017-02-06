@@ -28,7 +28,7 @@ type SetResult =
     | SetWon SetScore
 
 type alias SetScore =
-    { winner : Player 
+    { winner : Player
     , winScore : WinScore
     }
 
@@ -71,7 +71,6 @@ type Previous
     | PlayedThree ThirdSet
 
 
-type alias Model =
-    { previous : Maybe (Previous)
-    , current : SetInProgress
-    }
+type alias BestOfFive =
+    NormalSets SetInProgress Previous
+    | InLastSet LastSet FourthSet
